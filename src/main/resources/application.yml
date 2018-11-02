@@ -1,0 +1,13 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: ezviz-api
+
+
+logging:
+  level:
+    com.wongcu: debug
+
+ys.host: https://open.ys7.com
