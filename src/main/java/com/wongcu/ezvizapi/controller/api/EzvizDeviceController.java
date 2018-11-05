@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wongcu
@@ -37,5 +38,10 @@ public class EzvizDeviceController {
     @PutMapping("/update_device_name")
     public YSResult updateDeviceName(String accessToken, String deviceSerial, String deviceName) throws IOException {
         return deviceClient.updateDeviceName(ysHost, accessToken, deviceSerial, deviceName);
+    }
+
+    @GetMapping("/capacity")
+    public YSResult<Map<String,String>> deviceCapacity(String accessToken, String deviceSerial) throws IOException {
+        return deviceClient.deviceCapacity(ysHost,accessToken,deviceSerial);
     }
 }

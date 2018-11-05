@@ -74,4 +74,26 @@ public class EzvizDeviceClient {
         });
         return ysResult;
     }
+
+    /**
+     * 根据设备序列号查询设备能力集
+     * @param host
+     * @param accessToken 访问令牌
+     * @param deviceSerial 设备序列号
+     * @return Map<K,V> K-能力名 V-是否具备该能力
+     */
+    public YSResult<Map<String,String>> deviceCapacity(String host, String accessToken, String deviceSerial) throws IOException {
+        Map<String, Object> params = new HashMap<>(2);
+        params.put("accessToken", accessToken);
+        params.put("deviceSerial", deviceSerial);
+        final String url = host + "/api/lapp/device/capacity";
+        HttpClientResult result = HttpUtil.postWithForm(url, null, params);
+        if (!result.isSuccess()) {
+            log.error("{}调用发生异常,result:{}", url, result);
+            return new YSResult<>();
+        }
+        YSResult<Map<String,String>> ysResult = JSON.parseObject(result.getData(), new TypeReference<YSResult<Map<String,String>>>() {
+        });
+        return ysResult;
+    }
 }
